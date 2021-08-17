@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block content %}
+<section class="hero is-primary p-5">
+<h1 class="title is-white">All Books</h1>
+
+</section>
+
+    {% for book in books %} 
+    <div class="container pt-5">
+        <div class="columns">
+            <div class="column center is-three-quarters-mobile is-two-thirds-tablet is-one-third-desktop">
+        
+            {% if book.title %}
+            <div class="card ">
+                <h4 class="title is-4 is-primary card-header p-3">{{ book.title }}</h4>
+                {% endif %} 
+                {% if book.artist %}
+                <div class="card-content">
+                    <div class="content">
+                        <div>By: {{ book.author }}</div>
+                    {% endif %} 
+                    {% if book.year_released %}
+                        <div class="content">Released: {{ book.year_published }}</div>
+                    {% endif %}
+                    </div>
+                </div>
+                
+
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

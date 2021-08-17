@@ -135,3 +135,9 @@ STATIC_URL = "/static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "books.User"
+
+REGISTRATION_OPEN = True
+
+SIMPLE_BACKEND_REDIRECT_URL = "/"
+
+REGISTRATION_AUTO_LOGIN = True
