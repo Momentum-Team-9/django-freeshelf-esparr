@@ -11,7 +11,7 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-class Books(models.Model):
+class Book(models.Model):
     year_regex = RegexValidator(
         regex=r'^\d{4}$',
         message="Album year must be entered in the format: 'XXXX'.")
@@ -25,4 +25,23 @@ class Books(models.Model):
     description = models.TextField(null=True, blank=True)
     url = models.URLField(null=True, blank=True)
     image_url = models.URLField(null=True, blank=True)
+    categories = models.ManyToManyField("Category", related_name="books")
     created_at = models.DateTimeField(auto_now_add=True)
+    favorited_by = models.ManyToManyField("User", related_name="fav_books")
+
+    def __repr__(self):
+        return f"<Album title={self.title}>"
+    
+    def __str__(self):
+        return self.title
+    
+class Category(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(max_length=75)
+
+    def __repr__(self):
+        return f"<Category name={self.name}>"
+    
+    def __str__(self):
+        return self.name
+
