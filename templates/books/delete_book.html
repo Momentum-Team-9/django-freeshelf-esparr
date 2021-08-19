@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero is-dark p-5">
+    <h1 class="title is-white">Delete Book</h1>
+</section>
+
+{% load bulma_tags %}
+{# Display a form #}
+<div class="m-5">
+    <form action="{% url 'delete_book' pk=book.pk %}" method="POST">
+        {% csrf_token %}
+        <p class="pt-5">Are you sure you want to delete the book {{ book.title }} by {{ book.artist }}?</p>
+        <div>
+        <div class="field">
+            <button type="submit" class="button is-primary mt-5">Delete Book</button>
+        </div>
+        <a href="{% url 'list_books' %}" class="is-danger">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

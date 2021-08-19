@@ -13,4 +13,5 @@ class BookForm(forms.ModelForm):
             'description',
             'url',
             'image_url',
+            'categories',
         ]

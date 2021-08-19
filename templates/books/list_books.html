@@ -1,35 +1,54 @@
-{% extends "base.html" %} {% block content %}
-<section class="hero is-primary p-5">
+{% extends "base.html" %} 
+
+{% block content %}
+<section class="hero is-small is-dark p-5">
 <h1 class="title is-white">All Books</h1>
+<p class="subtitle is-white"><a href="{% url 'add_book' %}">+ Add a Book</a></p>
 
 </section>
 
-    {% for book in books %} 
+{% for book in books %}
+<section class="is-flex">
+    
     <div class="container pt-5">
-        <div class="columns">
-            <div class="column center is-three-quarters-mobile is-two-thirds-tablet is-one-third-desktop">
         
-            {% if book.title %}
-            <div class="card ">
-                <h4 class="title is-4 is-primary card-header p-3">{{ book.title }}</h4>
-                {% endif %} 
-                {% if book.artist %}
-                <div class="card-content">
-                    <div class="content">
-                        <div>By: {{ book.author }}</div>
+        <div class="columns"> 
+            <div class="column">
+        
+                <div class="card">
+                    {% if book.title %}
+                    <h4 class="title is-4 is-primary card-header p-3">{{ book.title }}</h4>
                     {% endif %} 
-                    {% if book.year_released %}
-                        <div class="content">Released: {{ book.year_published }}</div>
-                    {% endif %}
+
+                    <div class="card-content">
+
+                        {% if book.image_url %}
+                        <div class="media">
+                            <div class="media-left">
+                            <figure class="image is-48x48 mr-5 mb-6">
+
+                                <img src="{{ book.image_url }}" alt="Placeholder image">
+                            </figure>
+                            </div>
+                        {% endif %}
+                        {% if book.author %}
+                        <div class="content">
+                            <div>By: {{ book.author }}</div>
+                        {% endif %} 
+                        {% if book.year_published %}
+                            <div class="content">Released: {{ book.year_published }}</div>
+                        {% endif %}
+                        </div>
                     </div>
+                    <footer class="card-footer">
+                        <a href="{% url 'view_book' pk=book.pk %}" class="card-footer-item">View</a><br />
+                        <a href="{% url 'edit_book' pk=book.pk %}" class="card-footer-item">Edit</a><br />
+                        <a href="{% url 'delete_book' pk=book.pk %}" class="card-footer-item is-danger">Delete</a>
+                    </footer>
                 </div>
-                
-
-
-            </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 {% endfor %}
 {% endblock %}

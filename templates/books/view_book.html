@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-dark p-5">
+<h1 class="title is-white">Book Info</h1>
+<p class="subtitle is-white"><a href="{% url 'list_books' %}">Return to List of Books</a></p>
+</section>
+
+<div class="flex flex-wrap">
+    <div class="container pt-5">
+        {% if book.title %}
+        <div class="card">
+            <h2 class="title is-4 is-primary card-header p-3">{{ book.title }}</h2>
+            {% endif %}
+
+
+
+                <div class="card-content">
+
+                <div class="content">
+
+                    {% if book.image_url %}
+                    <div class="card-image">
+                        <div class="is-left">
+                        <figure class="image is-96x96 mb-6">
+                            <img src="{{ book.image_url }}" alt="Placeholder image">
+                        </figure>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if book.description %}
+                    <div class='is-italic'>{{ book.description }}</div>
+                    {% endif %}
+                        
+                    <br>
+                    {% if book.author %}
+                    <div>By: {{ book.author }}</div>
+                    {% endif %}
+                
+                    {% if book.year_published %}
+                    <div>Published: {{ book.year_published }}</div>
+                    {% endif %}
+
+                    {% if book.categories %}
+                    <div class="is-italic has-text-primary">categories: {{ book.categories.all }}</div>
+                    {% endif %}
+                </div>
+            </div>   
+        <footer class="card-footer">
+            <a href="{% url 'edit_book' pk=book.pk %}" class="card-footer-item">Edit Book</a><br>    
+            <a href="{% url 'delete_book' pk=book.pk %}"  class="card-footer-item">Delete Book</a>
+        </footer>
+    </div>
+</div> 
+{% endblock %}

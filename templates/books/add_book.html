@@ -1,0 +1,21 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-dark p-5">
+    <h1 class="title is-white">Add Book</h1>
+    <p class="subtitle is-white"><a href="{% url 'list_books' %}">Return to List of Books</a></p>
+</section>
+
+{% load bulma_tags %}
+{# Display a form #}
+<div class="control m-5">
+    <form class="form" action="{% url 'add_book' %}" method="POST">
+    {% csrf_token %}
+    {{ form|bulma }}
+    <div class="field">
+        <button type="submit" class="button is-primary">Add Book</button>
+    </div>
+</form>
+</div>
+{% endblock %}
